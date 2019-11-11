@@ -1,35 +1,41 @@
-t1 = int(input("Введіть бали Іванова у першому турі: "))
-t2 = int(input("Введіть бали Петрова у першому турі: "))
-t3 = int(input("Введіть бали Сидорова у першому турі: "))
+"""
+До фіналу конкурсу кращого за професією «Спеціаліст електронного офісу» 
+були допущені троє: Іванов, Петров, Сидоров. Змагання проходили в три тури. 
+Іванов в першому турі набрав t1 балів, у другому - n1, в третьому - p1. 
+Петров - t2, n2, p2 відповідно; Сидоров - t3, n3, p3. Скласти програму, 
+що визначає, скільки балів набрав переможець (бали вводити з клавіатури). 
+"""
 
-n1 = int(input("Введіть бали Іванова у другому турі: "))
-n2 = int(input("Введіть бали Петрова у другому турі: "))
-n3 = int(input("Введіть бали Сидорова у другому турі: "))
+import re
+import math
 
-p1 = int(input("Введіть бали Іванова у третьому турі: "))
-p2 = int(input("Введіть бали Петрова у третьому турі: "))
-p3 = int(input("Введіть бали Сидорова у третьому турі: "))
+points_pattern = re.compile("^\d*(\.\d+)?$")
 
-i=t1+n1+p1
-p=t2+n2+p2
-s=t3+n3+p3
+#validator
+def validate_points(pattern, surname, tournament):
+	points = input("Введіть бали " + surname + " у " + tournament + " турі: ")
+	while not bool(pattern.match(points)):
+		points = input("Для таких балів неможливо обчислити задачу, спробуйте ще раз.\nВведіть бали " + surname + " у " + tournament + " турі: ")
+	points = float(points)
+	return points
 
-surname = ""
-result = 0
 
-if i>p:
-    if i>s:
-        surname = "Іванов"
-        result = i
-    else:
-        surname = "Сідорова"
-        result = s
-elif p>s:
-    surname = "Петров"
-    result = p
-else:
-    surname = "Сідорова"
-    result = s
+surnames = ["Іванова", "Петрова", "Сидорова"]
+tournaments = ["першому", "другому", "третьому"]
+results = {surnames[0]:"", surnames[1]:"", surnames[2]:""}
 
-print("Переможцем є ", surname, "із загальною сумою баллів: ", str(result))
+for surname in surnames:
+	sum = 0
+	for tournament in tournaments:
+		sum += validate_points(points_pattern, surname, tournament)
+	results[surname] = sum
+
+maximum = 0
+winner = ""
+for name, point in results.items():
+	if point > maximum:
+		maximum = point
+		winner = name
+		
+print("Переможцем є " + winner + "із загальною суммою баллів: " + point)
 exit = input("Натисніть Enter для завершення")

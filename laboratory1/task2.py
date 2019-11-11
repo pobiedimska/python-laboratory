@@ -9,12 +9,12 @@
 import re
 import math
 
-points_pattern = re.match("^\d*(\.\d+)?$")
+points_pattern = re.compile("^\d*(\.\d+)?$")
 
 #validator
 def validate_points(pattern, surname, tournament):
 	points = input("Введіть бали " + surname + " у " + tournament + " турі: ")
-	while not re.match(pattern, points):
+	while not bool(pattern.match(points)):
 		points = input("Для таких балів неможливо обчислити задачу, спробуйте ще раз.\nВведіть бали " + surname + " у " + tournament + " турі: ")
 	points = float(points)
 	return points

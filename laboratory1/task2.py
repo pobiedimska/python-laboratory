@@ -14,7 +14,7 @@ points_pattern = re.match("^\d*(\.\d+)?$")
 #validator
 def validate_points(pattern, surname, tournament):
 	points = input("Введіть бали " + surname + " у " + tournament + " турі: ")
-	while not bool(pattern):
+	while not re.match(pattern, points):
 		points = input("Для таких балів неможливо обчислити задачу, спробуйте ще раз.\nВведіть бали " + surname + " у " + tournament + " турі: ")
 	points = float(points)
 	return points

@@ -10,7 +10,7 @@ integer_pattern = re.compile("^[-+]{0,1}[0,1]+$")
 #validator
 def input_number(pattern, n):
 	number = input("Введіть " + str(n) + " число у двійковій системі числення: ")
-	while not bool(pattern.match(nuber)):
+	while not bool(pattern.match(number)):
         number = input("З таким значенням неможливо виконати задачу. Спробуйте ще раз.\nВведіть " + str(n) + " число: ")
 	return number
 	

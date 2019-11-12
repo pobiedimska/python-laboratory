@@ -1,19 +1,35 @@
-print("Побєдімська Соня Ігорівна\nЛабораторна робота №2\nВаріант 17\nЗнаходження максимального цілого числа, "
-      "квадрат якого мешний за N\n")
+"""
+2)	Дано ціле число N(>0). Знайти найбільше ціле число K, 
+квадрат якого не перевищує N: K2≤N. Функцію добування 
+квадратного кореня не використовувати.
+"""
 
+import re
+
+limit_pattern = re.compile("^\d*$")
+
+#validator for sum limit
+def validate_integer(pattern):
+	value = input("Будь ласка, введіть додатнє N: ")
+	while not bool(pattern.match(value)):
+		value = input("Для такого значення неможливо вирішити задачу, спробуйте щось інше.")
+	value = int(value)
+	return value
+
+def validate_limit(pattern):
+    number = validator_integer(pattern)
+    while number<=0:
+		print("N повинно бути додатнім.")
+        number = validator_integer(pattern)
+    return number
+
+	
 i = 0
 max_int = 0
-n = 0
 
 exit = ""
 while exit == "":
- while n <= 0 or ValueError:
-     try:
-      n = float(input("Будь ласка, введіть додатнє N: "))
-      break
-     except ValueError:
-         print("Для такого значення неможливо вирішити задачу, спробуйте щось інше.")
-         n = 0
+n = validate_limit(limit_pattern)
 
  while i <= n:
      if i**2 <= n:
